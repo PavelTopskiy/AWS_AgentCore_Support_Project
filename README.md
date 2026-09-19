@@ -31,6 +31,20 @@ Requires Python 3.12, `uv`, AWS CLI v2 and Docker with ARM64 build support for
 deployment. Use SSO/temporary credentials. `scripts/deploy.sh` creates billable AWS
 resources when **you run it**; it does not publish a Git repository.
 
+## Play with the deployed agent
+
+Start an interactive terminal client. It resolves the Runtime ARN from the deployed
+stack, keeps a session open, and creates trusted operation IDs for refund requests:
+
+```bash
+uv run --frozen python -m scripts.chat --stack support-agent
+```
+
+Try `Why is order 123 delayed?`, `Show my customer information`, or `Refund $10 for
+order retry`. Use `/retry` to repeat the exact last operation and observe idempotency.
+Use `/new` to start a second session while keeping AgentCore long-term Memory, and
+`/quit` to exit. All orders and payments in this project are synthetic.
+
 ## Layout
 
 | Path | Purpose |
