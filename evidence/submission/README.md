@@ -15,3 +15,9 @@ The sanitized live report `scenarios-1789823541.json` was produced by
 The data is synthetic. Account and resource identifiers are deployment metadata,
 not credentials. Add CloudWatch screenshots and the completed trace/span failure
 matrix here after enabling AgentCore trace and application-log delivery.
+
+Cloud fault drills recorded after observability was enabled:
+
+- `failure-timeout.md`: Lambda timeout with Runtime trace ID and recovery record.
+- `failure-upstream-500.md`: simulated upstream failure envelope with Runtime trace
+  ID and an explicit note that it is not a real Gateway HTTP 500.
