@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentcore-support-production"
+version = "0.1.0"
+description = "IAM-scoped customer support with AgentCore Runtime, Gateway, Memory and Cedar"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+  "bedrock-agentcore==1.23.0",
+  "strands-agents==1.55.1",
+  "boto3==1.43.95",
+  "mcp==1.24.0",
+  "httpx==0.28.1",
+  "aws-opentelemetry-distro==0.18.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<9", "moto[dynamodb]>=5.1,<6", "ruff>=0.12,<1", "cfn-lint>=1.40,<2", "aws-xray-sdk==2.14.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/support_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["build", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

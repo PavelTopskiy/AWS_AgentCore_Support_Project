@@ -1,0 +1,32 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Private, retained build artifacts for the customer support agent",
+  "Resources": {
+    "Artifacts": {
+      "Type": "AWS::S3::Bucket",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "VersioningConfiguration": {"Status": "Enabled"},
+        "BucketEncryption": {"ServerSideEncryptionConfiguration": [{"ServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]},
+        "PublicAccessBlockConfiguration": {"BlockPublicAcls": true, "BlockPublicPolicy": true, "IgnorePublicAcls": true, "RestrictPublicBuckets": true}
+      }
+    },
+    "Repository": {
+      "Type": "AWS::ECR::Repository",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "ImageScanningConfiguration": {"ScanOnPush": true},
+        "ImageTagMutability": "IMMUTABLE",
+        "EncryptionConfiguration": {"EncryptionType": "AES256"}
+      }
+    }
+  },
+  "Outputs": {
+    "Bucket": {"Value": {"Ref": "Artifacts"}},
+    "RepositoryName": {"Value": {"Ref": "Repository"}},
+    "RepositoryUri": {"Value": {"Fn::GetAtt": ["Repository", "RepositoryUri"]}},
+    "RepositoryArn": {"Value": {"Fn::GetAtt": ["Repository", "Arn"]}}
+  }
+}

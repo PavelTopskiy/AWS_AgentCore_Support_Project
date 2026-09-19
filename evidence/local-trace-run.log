@@ -1,0 +1,14 @@
+{"event": "tool_failure", "trace_id": "0dfc3673484994cce1e6949801a2f57e", "span_id": "de536dd0a97f9054", "code": "ReadTimeout", "attempt": 1}
+{"event": "http_failure", "trace_id": "310a1b1ea8ba2e972147c2fc3545aabb", "span_id": "5a85ddfa582c8bfc", "status": 500, "attempt": 1}
+{"event": "invalid_parameters", "trace_id": "3fd0e158474be4f2a2380fcd4e46eede", "span_id": "34cf6ee964e9e752", "code": "INVALID_PARAMETERS"}
+{"event": "tool_selected", "trace_id": "f470d80c2217aa094cf66c2b9b99850a", "span_id": "0656527b09209e48", "tool": "get_customer"}
+{"event": "wrong_tool_selection", "trace_id": "f470d80c2217aa094cf66c2b9b99850a", "span_id": "0656527b09209e48", "expected": "check_order", "actual": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "09f5be62aba5f479", "tool": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "76afa320d3549e59", "tool": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "e08170484e348a85", "tool": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "2032e879e17d5f91", "tool": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "3097a8a8c9cc2071", "tool": "get_customer"}
+{"event": "tool_selected", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "2caa234e93cb6216", "tool": "get_customer"}
+{"event": "llm_loop", "trace_id": "b09751d5203a02c4b183a04e5625fe1f", "span_id": "d1234a4daccedfe2", "model_calls": 7, "limit": 6}
+exception=<LoopLimit> | event loop cycle failed
+Wrote evidence/local-traces.json (local injected failures only)

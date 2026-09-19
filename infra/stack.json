@@ -1,0 +1,798 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Customer support assessment stack",
+  "Parameters": {
+    "CodeBucket": {
+      "Type": "String"
+    },
+    "CodeKey": {
+      "Type": "String"
+    },
+    "RuntimeImage": {
+      "Type": "String"
+    },
+    "RepositoryArn": {
+      "Type": "String"
+    },
+    "ModelId": {
+      "Type": "String"
+    },
+    "ModelArn": {
+      "Type": "String"
+    },
+    "CustomerId": {
+      "Type": "String",
+      "Default": "customer-001",
+      "AllowedPattern": "[A-Za-z0-9_-]{1,80}"
+    },
+    "Stage": {
+      "Type": "String",
+      "Default": "prod",
+      "AllowedValues": [
+        "test",
+        "prod"
+      ]
+    },
+    "FaultMode": {
+      "Type": "String",
+      "Default": "none",
+      "AllowedValues": [
+        "none",
+        "timeout",
+        "backend_500",
+        "lost_response"
+      ]
+    }
+  },
+  "Rules": {
+    "NoProductionFaults": {
+      "RuleCondition": {
+        "Fn::Equals": [
+          {
+            "Ref": "Stage"
+          },
+          "prod"
+        ]
+      },
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Equals": [
+              {
+                "Ref": "FaultMode"
+              },
+              "none"
+            ]
+          },
+          "AssertDescription": "Production cannot enable fault injection"
+        }
+      ]
+    }
+  },
+  "Resources": {
+    "Table": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "pk",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "pk",
+            "KeyType": "HASH"
+          }
+        ],
+        "SSESpecification": {
+          "SSEEnabled": true
+        },
+        "PointInTimeRecoverySpecification": {
+          "PointInTimeRecoveryEnabled": true
+        }
+      }
+    },
+    "ToolLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${AWS::StackName}-tools"
+        },
+        "RetentionInDays": 30
+      }
+    },
+    "ToolRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ScopedPermissions",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Table",
+                      "Arn"
+                    ]
+                  },
+                  "Condition": {
+                    "ForAllValues:StringLike": {
+                      "dynamodb:LeadingKeys": [
+                        {
+                          "Fn::Sub": "CUSTOMER#${CustomerId}#*"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "ToolLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Tools": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-tools"
+        },
+        "Runtime": "python3.12",
+        "Architectures": [
+          "arm64"
+        ],
+        "Handler": "support_agent.backend.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "ToolRole",
+            "Arn"
+          ]
+        },
+        "Timeout": 10,
+        "MemorySize": 256,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "Code": {
+          "S3Bucket": {
+            "Ref": "CodeBucket"
+          },
+          "S3Key": {
+            "Ref": "CodeKey"
+          }
+        },
+        "Environment": {
+          "Variables": {
+            "TABLE_NAME": {
+              "Ref": "Table"
+            },
+            "CUSTOMER_ID": {
+              "Ref": "CustomerId"
+            },
+            "STAGE": {
+              "Ref": "Stage"
+            },
+            "FAULT_MODE": {
+              "Ref": "FaultMode"
+            }
+          }
+        }
+      }
+    },
+    "Engine": {
+      "Type": "AWS::BedrockAgentCore::PolicyEngine",
+      "Properties": {
+        "Name": "SupportRefundPolicy"
+      }
+    },
+    "GatewayRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "bedrock-agentcore.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "aws:SourceAccount": {
+                    "Ref": "AWS::AccountId"
+                  }
+                },
+                "ArnLike": {
+                  "aws:SourceArn": {
+                    "Fn::Sub": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/*"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ScopedPermissions",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "lambda:InvokeFunction"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Tools",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock-agentcore:GetPolicyEngine"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Engine",
+                      "PolicyEngineArn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock-agentcore:AuthorizeAction",
+                    "bedrock-agentcore:PartiallyAuthorizeActions"
+                  ],
+                  "Resource": [
+                    {
+                      "Fn::GetAtt": [
+                        "Engine",
+                        "PolicyEngineArn"
+                      ]
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/${AWS::StackName}-gateway-*"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Gateway": {
+      "Type": "AWS::BedrockAgentCore::Gateway",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-gateway"
+        },
+        "AuthorizerType": "AWS_IAM",
+        "ProtocolType": "MCP",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "GatewayRole",
+            "Arn"
+          ]
+        },
+        "PolicyEngineConfiguration": {
+          "Arn": {
+            "Fn::GetAtt": [
+              "Engine",
+              "PolicyEngineArn"
+            ]
+          },
+          "Mode": "ENFORCE"
+        }
+      }
+    },
+    "Target": {
+      "Type": "AWS::BedrockAgentCore::GatewayTarget",
+      "Properties": {
+        "Name": "SupportTools",
+        "GatewayIdentifier": {
+          "Ref": "Gateway"
+        },
+        "CredentialProviderConfigurations": [
+          {
+            "CredentialProviderType": "GATEWAY_IAM_ROLE"
+          }
+        ],
+        "TargetConfiguration": {
+          "Mcp": {
+            "Lambda": {
+              "LambdaArn": {
+                "Fn::GetAtt": [
+                  "Tools",
+                  "Arn"
+                ]
+              },
+              "ToolSchema": {
+                "InlinePayload": [
+                  {
+                    "Name": "check_order",
+                    "Description": "Check order status and reason for delay for the authorized customer.",
+                    "InputSchema": {
+                      "Type": "object",
+                      "Properties": {
+                        "order_id": {
+                          "Type": "string",
+                          "Description": "Order identifier, for example 123"
+                        }
+                      },
+                      "Required": [
+                        "order_id"
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "get_customer",
+                    "Description": "Retrieve the authorized customer's name and support tier.",
+                    "InputSchema": {
+                      "Type": "object",
+                      "Properties": {}
+                    }
+                  },
+                  {
+                    "Name": "refund_customer",
+                    "Description": "Process one USD refund. Amount is integer cents. Reuse the operation key on retries.",
+                    "InputSchema": {
+                      "Type": "object",
+                      "Properties": {
+                        "order_id": {
+                          "Type": "string",
+                          "Description": "Order identifier"
+                        },
+                        "amount_cents": {
+                          "Type": "integer",
+                          "Description": "USD cents; $1000 = 100000"
+                        },
+                        "idempotency_key": {
+                          "Type": "string",
+                          "Description": "Stable caller operation identifier"
+                        }
+                      },
+                      "Required": [
+                        "order_id",
+                        "amount_cents",
+                        "idempotency_key"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ReadPolicy": {
+      "Type": "AWS::BedrockAgentCore::Policy",
+      "DependsOn": "Target",
+      "Properties": {
+        "Name": "ReadPolicy",
+        "PolicyEngineId": {
+          "Fn::GetAtt": [
+            "Engine",
+            "PolicyEngineId"
+          ]
+        },
+        "ValidationMode": "FAIL_ON_ANY_FINDINGS",
+        "EnforcementMode": "ACTIVE",
+        "Definition": {
+          "Cedar": {
+            "Statement": {
+              "Fn::Sub": "permit(\n  principal,\n  action in [AgentCore::Action::\"SupportTools___check_order\",\n             AgentCore::Action::\"SupportTools___get_customer\"],\n  resource == AgentCore::Gateway::\"${Gateway.GatewayArn}\"\n);\n"
+            }
+          }
+        }
+      }
+    },
+    "RefundPolicy": {
+      "Type": "AWS::BedrockAgentCore::Policy",
+      "DependsOn": "Target",
+      "Properties": {
+        "Name": "RefundPolicy",
+        "PolicyEngineId": {
+          "Fn::GetAtt": [
+            "Engine",
+            "PolicyEngineId"
+          ]
+        },
+        "ValidationMode": "FAIL_ON_ANY_FINDINGS",
+        "EnforcementMode": "ACTIVE",
+        "Definition": {
+          "Cedar": {
+            "Statement": {
+              "Fn::Sub": "permit(\n  principal,\n  action == AgentCore::Action::\"SupportTools___refund_customer\",\n  resource == AgentCore::Gateway::\"${Gateway.GatewayArn}\"\n)\nwhen {\n  context.input.amount_cents > 0 &&\n  context.input.amount_cents <= 100000\n};\n"
+            }
+          }
+        }
+      }
+    },
+    "Memory": {
+      "Type": "AWS::BedrockAgentCore::Memory",
+      "Properties": {
+        "Name": "SupportPreferences",
+        "EventExpiryDuration": 30,
+        "IndexedKeys": [
+          {
+            "Key": "stateType",
+            "Type": "STRING"
+          },
+          {
+            "Key": "agentId",
+            "Type": "STRING"
+          }
+        ],
+        "MemoryStrategies": [
+          {
+            "UserPreferenceMemoryStrategy": {
+              "Name": "UserPreferences",
+              "Namespaces": [
+                "/preferences/{actorId}/"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "RuntimeRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "bedrock-agentcore.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "StringEquals": {
+                  "aws:SourceAccount": {
+                    "Ref": "AWS::AccountId"
+                  }
+                },
+                "ArnLike": {
+                  "aws:SourceArn": {
+                    "Fn::Sub": "arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:runtime/*"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "ScopedPermissions",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock-agentcore:InvokeGateway"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Gateway",
+                      "GatewayArn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock-agentcore:CreateEvent",
+                    "bedrock-agentcore:GetEvent",
+                    "bedrock-agentcore:DeleteEvent",
+                    "bedrock-agentcore:ListEvents",
+                    "bedrock-agentcore:RetrieveMemoryRecords",
+                    "bedrock-agentcore:ListMemoryRecords"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Memory",
+                      "MemoryArn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "bedrock:InvokeModel",
+                    "bedrock:InvokeModelWithResponseStream"
+                  ],
+                  "Resource": {
+                    "Ref": "ModelArn"
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ecr:BatchGetImage",
+                    "ecr:GetDownloadUrlForLayer"
+                  ],
+                  "Resource": {
+                    "Ref": "RepositoryArn"
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ecr:GetAuthorizationToken"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents",
+                    "logs:DescribeLogStreams"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/runtimes/*"
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:DescribeLogGroups"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "xray:PutTraceSegments",
+                    "xray:PutTelemetryRecords",
+                    "xray:GetSamplingRules",
+                    "xray:GetSamplingTargets"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "cloudwatch:PutMetricData"
+                  ],
+                  "Resource": "*",
+                  "Condition": {
+                    "StringEquals": {
+                      "cloudwatch:namespace": "bedrock-agentcore"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Runtime": {
+      "Type": "AWS::BedrockAgentCore::Runtime",
+      "DependsOn": [
+        "ReadPolicy",
+        "RefundPolicy"
+      ],
+      "Properties": {
+        "AgentRuntimeName": "SupportProductionAgent",
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "RuntimeRole",
+            "Arn"
+          ]
+        },
+        "AgentRuntimeArtifact": {
+          "ContainerConfiguration": {
+            "ContainerUri": {
+              "Ref": "RuntimeImage"
+            }
+          }
+        },
+        "NetworkConfiguration": {
+          "NetworkMode": "PUBLIC"
+        },
+        "ProtocolConfiguration": "HTTP",
+        "EnvironmentVariables": {
+          "CUSTOMER_ID": {
+            "Ref": "CustomerId"
+          },
+          "MEMORY_ID": {
+            "Fn::GetAtt": [
+              "Memory",
+              "MemoryId"
+            ]
+          },
+          "MODEL_ID": {
+            "Ref": "ModelId"
+          },
+          "GATEWAY_URL": {
+            "Fn::GetAtt": [
+              "Gateway",
+              "GatewayUrl"
+            ]
+          },
+          "OTEL_SERVICE_NAME": "support-agent",
+          "OTEL_PYTHON_DISTRO": "aws_distro",
+          "OTEL_PYTHON_CONFIGURATOR": "aws_configurator",
+          "OTEL_TRACES_SAMPLER": "always_on",
+          "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+          "OTEL_PROPAGATORS": "xray,tracecontext,baggage",
+          "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "false",
+          "OTEL_SEMCONV_STABILITY_OPT_IN": "gen_ai_latest_experimental,gen_ai_unredacted_attributes="
+        }
+      }
+    },
+    "CallerPolicy": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "bedrock-agentcore:InvokeAgentRuntime"
+              ],
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "Runtime",
+                    "AgentRuntimeArn"
+                  ]
+                },
+                {
+                  "Fn::Sub": "${Runtime.AgentRuntimeArn}/runtime-endpoint/DEFAULT"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ToolErrorsAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmDescription": "Lambda failures/timeouts; configure an SNS action for paging",
+        "Namespace": "AWS/Lambda",
+        "MetricName": "Errors",
+        "Statistic": "Sum",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "Tools"
+            }
+          }
+        ],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Threshold": 1,
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "TreatMissingData": "notBreaching"
+      }
+    }
+  },
+  "Outputs": {
+    "RuntimeArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Runtime",
+          "AgentRuntimeArn"
+        ]
+      }
+    },
+    "GatewayUrl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Gateway",
+          "GatewayUrl"
+        ]
+      }
+    },
+    "GatewayArn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Gateway",
+          "GatewayArn"
+        ]
+      }
+    },
+    "GatewayId": {
+      "Value": {
+        "Ref": "Gateway"
+      }
+    },
+    "PolicyEngineId": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Engine",
+          "PolicyEngineId"
+        ]
+      }
+    },
+    "MemoryId": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Memory",
+          "MemoryId"
+        ]
+      }
+    },
+    "TableName": {
+      "Value": {
+        "Ref": "Table"
+      }
+    },
+    "ToolFunction": {
+      "Value": {
+        "Ref": "Tools"
+      }
+    },
+    "CallerPolicyArn": {
+      "Value": {
+        "Ref": "CallerPolicy"
+      }
+    },
+    "CustomerId": {
+      "Value": {
+        "Ref": "CustomerId"
+      }
+    }
+  }
+}

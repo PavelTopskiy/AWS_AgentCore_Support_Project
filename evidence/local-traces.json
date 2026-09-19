@@ -1,0 +1,2281 @@
+{
+  "environment": "local-injected",
+  "aws_deployed": false,
+  "root_causes": {
+    "tool_timeout": "Injected transport ReadTimeout; bounded retry succeeded on attempt 2.",
+    "http_500": "Injected HTTP 500 response; bounded retry succeeded on attempt 2.",
+    "invalid_parameters": "Order identifier contains forbidden path characters; rejected before backend access.",
+    "wrong_tool_selection": "Injected get_customer selection when the evaluator expected check_order.",
+    "llm_loop": "Seventh model attempt rejected by the six-call runtime budget."
+  },
+  "trace_ids": {
+    "tool_timeout": "0dfc3673484994cce1e6949801a2f57e",
+    "http_500": "310a1b1ea8ba2e972147c2fc3545aabb",
+    "invalid_parameters": "3fd0e158474be4f2a2380fcd4e46eede",
+    "wrong_tool_selection": "f470d80c2217aa094cf66c2b9b99850a",
+    "llm_loop": "b09751d5203a02c4b183a04e5625fe1f"
+  },
+  "spans": [
+    {
+      "name": "gateway.attempt",
+      "context": {
+        "trace_id": "0x0dfc3673484994cce1e6949801a2f57e",
+        "span_id": "0xde536dd0a97f9054",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x7581e939680eb6bd",
+      "start_time": "2026-09-18T19:45:36.989377Z",
+      "end_time": "2026-09-18T19:45:36.989488Z",
+      "status": {
+        "status_code": "ERROR"
+      },
+      "attributes": {
+        "retry.attempt": 1
+      },
+      "events": [
+        {
+          "name": "tool_failure",
+          "timestamp": "2026-09-18T19:45:36.989411Z",
+          "attributes": {
+            "code": "ReadTimeout",
+            "attempt": 1
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "gateway.attempt",
+      "context": {
+        "trace_id": "0x0dfc3673484994cce1e6949801a2f57e",
+        "span_id": "0x642628e0e87bb797",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x7581e939680eb6bd",
+      "start_time": "2026-09-18T19:45:36.989574Z",
+      "end_time": "2026-09-18T19:45:36.989591Z",
+      "status": {
+        "status_code": "UNSET"
+      },
+      "attributes": {
+        "retry.attempt": 2
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "drill.tool_timeout",
+      "context": {
+        "trace_id": "0x0dfc3673484994cce1e6949801a2f57e",
+        "span_id": "0x7581e939680eb6bd",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": null,
+      "start_time": "2026-09-18T19:45:36.989052Z",
+      "end_time": "2026-09-18T19:45:36.989728Z",
+      "status": {
+        "status_code": "UNSET"
+      },
+      "attributes": {
+        "evidence.environment": "local-injected",
+        "scenario": "tool_timeout"
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "gateway.attempt",
+      "context": {
+        "trace_id": "0x310a1b1ea8ba2e972147c2fc3545aabb",
+        "span_id": "0x5a85ddfa582c8bfc",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x6ce4730cb3de49c0",
+      "start_time": "2026-09-18T19:45:36.990007Z",
+      "end_time": "2026-09-18T19:45:36.990045Z",
+      "status": {
+        "status_code": "ERROR"
+      },
+      "attributes": {
+        "retry.attempt": 1
+      },
+      "events": [
+        {
+          "name": "http_failure",
+          "timestamp": "2026-09-18T19:45:36.990028Z",
+          "attributes": {
+            "status": 500,
+            "attempt": 1
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "gateway.attempt",
+      "context": {
+        "trace_id": "0x310a1b1ea8ba2e972147c2fc3545aabb",
+        "span_id": "0x88a963b6e7da410d",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x6ce4730cb3de49c0",
+      "start_time": "2026-09-18T19:45:36.990108Z",
+      "end_time": "2026-09-18T19:45:36.990120Z",
+      "status": {
+        "status_code": "UNSET"
+      },
+      "attributes": {
+        "retry.attempt": 2
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "drill.http_500",
+      "context": {
+        "trace_id": "0x310a1b1ea8ba2e972147c2fc3545aabb",
+        "span_id": "0x6ce4730cb3de49c0",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": null,
+      "start_time": "2026-09-18T19:45:36.989743Z",
+      "end_time": "2026-09-18T19:45:36.990220Z",
+      "status": {
+        "status_code": "UNSET"
+      },
+      "attributes": {
+        "evidence.environment": "local-injected",
+        "scenario": "http_500"
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "drill.invalid_parameters",
+      "context": {
+        "trace_id": "0x3fd0e158474be4f2a2380fcd4e46eede",
+        "span_id": "0x34cf6ee964e9e752",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": null,
+      "start_time": "2026-09-18T19:45:36.990231Z",
+      "end_time": "2026-09-18T19:45:36.990258Z",
+      "status": {
+        "status_code": "ERROR"
+      },
+      "attributes": {
+        "evidence.environment": "local-injected",
+        "scenario": "invalid_parameters"
+      },
+      "events": [
+        {
+          "name": "invalid_parameters",
+          "timestamp": "2026-09-18T19:45:36.990246Z",
+          "attributes": {
+            "code": "INVALID_PARAMETERS"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0xc78de10e0b1d7a36",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x886ada7aed2ef887",
+      "start_time": "2026-09-18T19:45:36.991393Z",
+      "end_time": "2026-09-18T19:45:36.991481Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.991394+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.991475+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.991405Z",
+          "attributes": {
+            "content": "[{\"text\": \"Why is order 123 delayed?\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.991473Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0x0656527b09209e48",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x886ada7aed2ef887",
+      "start_time": "2026-09-18T19:45:36.991627Z",
+      "end_time": "2026-09-18T19:45:36.991970Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.991628+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-1",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.991965+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.991638Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-1"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.991686Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "wrong_tool_selection",
+          "timestamp": "2026-09-18T19:45:36.991704Z",
+          "attributes": {
+            "expected": "check_order",
+            "actual": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.991964Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-1"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0x886ada7aed2ef887",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x8c27b608b0109c72",
+      "start_time": "2026-09-18T19:45:36.991312Z",
+      "end_time": "2026-09-18T19:45:36.992036Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.991314+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "d38f0be2-8b5a-40da-a6bb-d08ac9f2d588",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.992033+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.991326Z",
+          "attributes": {
+            "content": "[{\"text\": \"Why is order 123 delayed?\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.992031Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0xb6ab6480845e1078",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x0b738b3bcd968156",
+      "start_time": "2026-09-18T19:45:36.992150Z",
+      "end_time": "2026-09-18T19:45:36.992284Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.992150+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.992275+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.992157Z",
+          "attributes": {
+            "content": "[{\"text\": \"Why is order 123 delayed?\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.992162Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.992167Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.992273Z",
+          "attributes": {
+            "finish_reason": "end_turn",
+            "message": "[{\"text\": \"Offline drill complete\"}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0x0b738b3bcd968156",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x8c27b608b0109c72",
+      "start_time": "2026-09-18T19:45:36.992072Z",
+      "end_time": "2026-09-18T19:45:36.992319Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.992073+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "e6122ab2-d136-4978-9f08-aaf1ff14fadc",
+        "event_loop.parent_cycle_id": "d38f0be2-8b5a-40da-a6bb-d08ac9f2d588",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.992316+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.992081Z",
+          "attributes": {
+            "content": "[{\"text\": \"Why is order 123 delayed?\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.992086Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.992092Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "invoke_agent Strands Agents",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0x8c27b608b0109c72",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0xe04a32373fb08fb0",
+      "start_time": "2026-09-18T19:45:36.991075Z",
+      "end_time": "2026-09-18T19:45:36.992366Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.991077+00:00",
+        "gen_ai.operation.name": "invoke_agent",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.agent.name": "Strands Agents",
+        "gen_ai.agent.tools": "[\"get_customer\"]",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.992361+00:00",
+        "gen_ai.usage.prompt_tokens": 2,
+        "gen_ai.usage.completion_tokens": 2,
+        "gen_ai.usage.input_tokens": 2,
+        "gen_ai.usage.output_tokens": 2,
+        "gen_ai.usage.total_tokens": 4,
+        "gen_ai.usage.cache_read.input_tokens": 0,
+        "gen_ai.usage.cache_creation.input_tokens": 0,
+        "gen_ai.usage.cache_read_input_tokens": 0,
+        "gen_ai.usage.cache_write_input_tokens": 0
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.991157Z",
+          "attributes": {
+            "content": "[{\"text\": \"Why is order 123 delayed?\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.992355Z",
+          "attributes": {
+            "message": "Offline drill complete\n",
+            "finish_reason": "end_turn"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "drill.wrong_tool_selection",
+      "context": {
+        "trace_id": "0xf470d80c2217aa094cf66c2b9b99850a",
+        "span_id": "0xe04a32373fb08fb0",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": null,
+      "start_time": "2026-09-18T19:45:36.990268Z",
+      "end_time": "2026-09-18T19:45:36.992638Z",
+      "status": {
+        "status_code": "ERROR"
+      },
+      "attributes": {
+        "evidence.environment": "local-injected",
+        "scenario": "wrong_tool_selection"
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xc1a09d1252ac3be7",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0xc3bffdc2242a2428",
+      "start_time": "2026-09-18T19:45:36.993071Z",
+      "end_time": "2026-09-18T19:45:36.993129Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993071+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.993124+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.993079Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.993123Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x09f5be62aba5f479",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0xc3bffdc2242a2428",
+      "start_time": "2026-09-18T19:45:36.993193Z",
+      "end_time": "2026-09-18T19:45:36.993433Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993194+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-1",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.993427+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.993202Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-1"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.993229Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.993425Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-1"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xc3bffdc2242a2428",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.993018Z",
+      "end_time": "2026-09-18T19:45:36.993503Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993018+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "871f8954-9283-4cb6-8e36-f043a7974725",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.993500+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.993028Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.993498Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xea2e43c884dbffea",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x4d0402410b636cd2",
+      "start_time": "2026-09-18T19:45:36.993631Z",
+      "end_time": "2026-09-18T19:45:36.993721Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993632+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.993716+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.993639Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.993644Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.993649Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.993715Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x76afa320d3549e59",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x4d0402410b636cd2",
+      "start_time": "2026-09-18T19:45:36.993789Z",
+      "end_time": "2026-09-18T19:45:36.993976Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993790+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-2",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.993973+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.993798Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-2"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.993828Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.993971Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-2"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x4d0402410b636cd2",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.993550Z",
+      "end_time": "2026-09-18T19:45:36.994027Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.993551+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "09197c3e-ebf9-4267-b64b-ef550bc3f63f",
+        "event_loop.parent_cycle_id": "871f8954-9283-4cb6-8e36-f043a7974725",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.994025+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.993561Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.993566Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.993571Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.994024Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xf8e1afebb25d02db",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x4a3f5027911588db",
+      "start_time": "2026-09-18T19:45:36.994140Z",
+      "end_time": "2026-09-18T19:45:36.994287Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994141+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.994282+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.994147Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994152Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994156Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994160Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994165Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.994280Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xe08170484e348a85",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x4a3f5027911588db",
+      "start_time": "2026-09-18T19:45:36.994345Z",
+      "end_time": "2026-09-18T19:45:36.994520Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994346+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-3",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.994516+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994354Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-3"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.994379Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.994514Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-3"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x4a3f5027911588db",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.994058Z",
+      "end_time": "2026-09-18T19:45:36.994575Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994059+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "30610aef-7ead-4135-a6ea-57231e7a0167",
+        "event_loop.parent_cycle_id": "09197c3e-ebf9-4267-b64b-ef550bc3f63f",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.994573+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.994066Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994071Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994076Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994080Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994085Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.994572Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xcbf990162b3a6373",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x5596e8cfe829510e",
+      "start_time": "2026-09-18T19:45:36.994713Z",
+      "end_time": "2026-09-18T19:45:36.994830Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994713+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.994826+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.994720Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994724Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994729Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994733Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994737Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994741Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994747Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.994824Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x2032e879e17d5f91",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x5596e8cfe829510e",
+      "start_time": "2026-09-18T19:45:36.994895Z",
+      "end_time": "2026-09-18T19:45:36.995061Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994896+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-4",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995057+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994904Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-4"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.994931Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995056Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-4"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x5596e8cfe829510e",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.994608Z",
+      "end_time": "2026-09-18T19:45:36.995113Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.994609+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "c0e73c43-ee38-42f7-80f3-436c17f52e75",
+        "event_loop.parent_cycle_id": "30610aef-7ead-4135-a6ea-57231e7a0167",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995110+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.994616Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994621Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994626Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994631Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994635Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.994639Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.994644Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995110Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x5f6f566e22b26399",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x788f5f0374263219",
+      "start_time": "2026-09-18T19:45:36.995261Z",
+      "end_time": "2026-09-18T19:45:36.995404Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.995261+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995399+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.995269Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995274Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995287Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995292Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995296Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995300Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995304Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995308Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995314Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995398Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-5\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x3097a8a8c9cc2071",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x788f5f0374263219",
+      "start_time": "2026-09-18T19:45:36.995464Z",
+      "end_time": "2026-09-18T19:45:36.995623Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.995464+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-5",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995619+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995472Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-5"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.995495Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995618Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-5"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x788f5f0374263219",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.995145Z",
+      "end_time": "2026-09-18T19:45:36.995681Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.995145+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "5e704413-f6f0-4020-87aa-5adfea8faccf",
+        "event_loop.parent_cycle_id": "c0e73c43-ee38-42f7-80f3-436c17f52e75",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995678+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.995154Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995159Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995164Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995168Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995173Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995177Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995181Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995185Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995189Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995677Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-5\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-5\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "chat",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xda5ccb305fc8d174",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x46c18898385f7e89",
+      "start_time": "2026-09-18T19:45:36.995845Z",
+      "end_time": "2026-09-18T19:45:36.995999Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.995845+00:00",
+        "gen_ai.operation.name": "chat",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.995995+00:00",
+        "gen_ai.usage.prompt_tokens": 1,
+        "gen_ai.usage.input_tokens": 1,
+        "gen_ai.usage.completion_tokens": 1,
+        "gen_ai.usage.output_tokens": 1,
+        "gen_ai.usage.total_tokens": 2,
+        "gen_ai.server.request.duration": 1
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.995853Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995858Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995862Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995866Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995870Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995874Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995878Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995882Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995887Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995890Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-5\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995895Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-5\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.995994Z",
+          "attributes": {
+            "finish_reason": "tool_use",
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-6\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_tool get_customer",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x2caa234e93cb6216",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x46c18898385f7e89",
+      "start_time": "2026-09-18T19:45:36.996061Z",
+      "end_time": "2026-09-18T19:45:36.996287Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.996067+00:00",
+        "gen_ai.operation.name": "execute_tool",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.tool.name": "get_customer",
+        "gen_ai.tool.call.id": "offline-call-6",
+        "gen_ai.tool.description": "Return a synthetic customer for the offline failure drills.",
+        "gen_ai.tool.json_schema": "{\"properties\": {}, \"type\": \"object\", \"required\": []}",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.996281+00:00",
+        "gen_ai.tool.status": "success"
+      },
+      "events": [
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996074Z",
+          "attributes": {
+            "role": "tool",
+            "content": "{}",
+            "id": "offline-call-6"
+          }
+        },
+        {
+          "name": "tool_selected",
+          "timestamp": "2026-09-18T19:45:36.996097Z",
+          "attributes": {
+            "tool": "get_customer"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.996278Z",
+          "attributes": {
+            "message": "[{\"text\": \"Alex Example\"}]",
+            "id": "offline-call-6"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x46c18898385f7e89",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.995712Z",
+      "end_time": "2026-09-18T19:45:36.996354Z",
+      "status": {
+        "status_code": "OK"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.995713+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "1c1ea825-f48c-4a7c-8f10-558bafd944d2",
+        "event_loop.parent_cycle_id": "5e704413-f6f0-4020-87aa-5adfea8faccf",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.996351+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.995720Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995725Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995730Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995734Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995738Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995742Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995746Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995750Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995754Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.995760Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-5\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.995764Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-5\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.choice",
+          "timestamp": "2026-09-18T19:45:36.996350Z",
+          "attributes": {
+            "message": "[{\"toolUse\": {\"toolUseId\": \"offline-call-6\", \"name\": \"get_customer\", \"input\": {}}}]",
+            "tool.result": "[{\"toolResult\": {\"toolUseId\": \"offline-call-6\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "execute_event_loop_cycle",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xd1234a4daccedfe2",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0x421b1c0b78791805",
+      "start_time": "2026-09-18T19:45:36.996388Z",
+      "end_time": "2026-09-18T19:45:36.997441Z",
+      "status": {
+        "status_code": "ERROR",
+        "description": "MODEL_CALL_BUDGET_EXCEEDED"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.996388+00:00",
+        "gen_ai.operation.name": "execute_event_loop_cycle",
+        "gen_ai.system": "strands-agents",
+        "event_loop.cycle_id": "c2ffef30-21d3-4cc3-84ff-58a123654686",
+        "event_loop.parent_cycle_id": "1c1ea825-f48c-4a7c-8f10-558bafd944d2",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.996495+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.996396Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996401Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-1\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996406Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-1\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996410Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-2\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996415Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-2\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996418Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-3\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996423Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-3\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996427Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-4\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996431Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-4\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996435Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-5\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996439Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-5\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "gen_ai.assistant.message",
+          "timestamp": "2026-09-18T19:45:36.996443Z",
+          "attributes": {
+            "content": "[{\"toolUse\": {\"toolUseId\": \"offline-call-6\", \"name\": \"get_customer\", \"input\": {}}}]"
+          }
+        },
+        {
+          "name": "gen_ai.tool.message",
+          "timestamp": "2026-09-18T19:45:36.996447Z",
+          "attributes": {
+            "content": "[{\"toolResult\": {\"toolUseId\": \"offline-call-6\", \"status\": \"success\", \"content\": [{\"text\": \"Alex Example\"}]}}]"
+          }
+        },
+        {
+          "name": "llm_loop",
+          "timestamp": "2026-09-18T19:45:36.996465Z",
+          "attributes": {
+            "model_calls": 7,
+            "limit": 6
+          }
+        },
+        {
+          "name": "exception",
+          "timestamp": "2026-09-18T19:45:36.997439Z",
+          "attributes": {
+            "exception.type": "support_agent.controls.LoopLimit",
+            "exception.message": "MODEL_CALL_BUDGET_EXCEEDED",
+            "exception.stacktrace": "Traceback (most recent call last):\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 302, in event_loop_cycle\n    async for model_event in model_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 690, in _handle_model_execution\n    raise e\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 519, in _handle_model_execution\n    before_model_call_event = await _invoke_before_model_call_hooks(agent, before_model_call_event)\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 461, in _invoke_before_model_call_hooks\n    event, interrupts = await agent.hooks.invoke_callbacks_async(event)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/hooks/registry.py\", line 341, in invoke_callbacks_async\n    callback(event)\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/src/support_agent/controls.py\", line 38, in before_model\n    raise LoopLimit(\"MODEL_CALL_BUDGET_EXCEEDED\")\nsupport_agent.controls.LoopLimit: MODEL_CALL_BUDGET_EXCEEDED\n",
+            "exception.escaped": "False"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "invoke_agent Strands Agents",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0x421b1c0b78791805",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": "0xb0d6c31e082f4e14",
+      "start_time": "2026-09-18T19:45:36.992969Z",
+      "end_time": "2026-09-18T19:45:36.998911Z",
+      "status": {
+        "status_code": "ERROR",
+        "description": "MODEL_CALL_BUDGET_EXCEEDED"
+      },
+      "attributes": {
+        "gen_ai.event.start_time": "2026-09-18T19:45:36.992970+00:00",
+        "gen_ai.operation.name": "invoke_agent",
+        "gen_ai.system": "strands-agents",
+        "gen_ai.agent.name": "Strands Agents",
+        "gen_ai.agent.tools": "[\"get_customer\"]",
+        "gen_ai.event.end_time": "2026-09-18T19:45:36.997554+00:00"
+      },
+      "events": [
+        {
+          "name": "gen_ai.user.message",
+          "timestamp": "2026-09-18T19:45:36.992979Z",
+          "attributes": {
+            "content": "[{\"text\": \"Repeat forever\"}]"
+          }
+        },
+        {
+          "name": "exception",
+          "timestamp": "2026-09-18T19:45:36.998909Z",
+          "attributes": {
+            "exception.type": "strands.types.exceptions.EventLoopException",
+            "exception.message": "MODEL_CALL_BUDGET_EXCEEDED",
+            "exception.stacktrace": "Traceback (most recent call last):\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 302, in event_loop_cycle\n    async for model_event in model_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 690, in _handle_model_execution\n    raise e\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 519, in _handle_model_execution\n    before_model_call_event = await _invoke_before_model_call_hooks(agent, before_model_call_event)\n                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 461, in _invoke_before_model_call_hooks\n    event, interrupts = await agent.hooks.invoke_callbacks_async(event)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/hooks/registry.py\", line 341, in invoke_callbacks_async\n    callback(event)\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/src/support_agent/controls.py\", line 38, in before_model\n    raise LoopLimit(\"MODEL_CALL_BUDGET_EXCEEDED\")\nsupport_agent.controls.LoopLimit: MODEL_CALL_BUDGET_EXCEEDED\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/agent/agent.py\", line 1434, in stream_async\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/agent/agent.py\", line 1578, in _run_loop\n    async for event in self._middleware_registry.invoke(\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/_middleware/registry.py\", line 167, in invoke\n    async for event in gen:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/agent/agent.py\", line 1733, in terminal\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/agent/agent.py\", line 1788, in _execute_event_loop_cycle\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 360, in event_loop_cycle\n    async for tool_event in tool_events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 1027, in _handle_tool_execution\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 450, in recurse_event_loop\n    async for event in events:\n  File \"/Users/pavelkhudikov/PycharmProjects/AwsAgentCoreProject/SupportAgentProduction/.venv/lib/python3.12/site-packages/strands/event_loop/event_loop.py\", line 409, in event_loop_cycle\n    raise EventLoopException(e, invocation_state[\"request_state\"]) from e\nstrands.types.exceptions.EventLoopException: MODEL_CALL_BUDGET_EXCEEDED\n",
+            "exception.escaped": "False"
+          }
+        }
+      ],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    },
+    {
+      "name": "drill.llm_loop",
+      "context": {
+        "trace_id": "0xb09751d5203a02c4b183a04e5625fe1f",
+        "span_id": "0xb0d6c31e082f4e14",
+        "trace_state": "[]"
+      },
+      "kind": "SpanKind.INTERNAL",
+      "parent_id": null,
+      "start_time": "2026-09-18T19:45:36.992661Z",
+      "end_time": "2026-09-18T19:45:36.999369Z",
+      "status": {
+        "status_code": "ERROR"
+      },
+      "attributes": {
+        "evidence.environment": "local-injected",
+        "scenario": "llm_loop"
+      },
+      "events": [],
+      "links": [],
+      "resource": {
+        "attributes": {
+          "telemetry.sdk.language": "python",
+          "telemetry.sdk.name": "opentelemetry",
+          "telemetry.sdk.version": "1.42.1",
+          "service.name": "unknown_service"
+        },
+        "schema_url": ""
+      }
+    }
+  ]
+}

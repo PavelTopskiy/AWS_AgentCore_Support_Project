@@ -1,0 +1,23 @@
+name: checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra dev
+      - run: uv run --frozen ruff check .
+      - run: uv run --frozen ruff format --check .
+      - run: uv run --frozen python infra/generate.py && git diff --exit-code infra/stack.json
+      - run: uv run --frozen cfn-lint infra/stack.json infra/bootstrap.json
+      - run: uv run --frozen pytest -q --junitxml=evidence/junit.xml
+      - run: uv run --frozen python -m scripts.local_evidence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: local-test-evidence
+          path: evidence/
