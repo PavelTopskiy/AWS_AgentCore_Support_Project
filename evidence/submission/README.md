@@ -21,3 +21,5 @@ Cloud fault drills recorded after observability was enabled:
 - `failure-timeout.md`: Lambda timeout with Runtime trace ID and recovery record.
 - `failure-upstream-500.md`: simulated upstream failure envelope with Runtime trace
   ID and an explicit note that it is not a real Gateway HTTP 500.
+- `failure-invalid-parameters.md`: deterministic direct MCP validation failure,
+  correlated to its Lambda request, X-Ray trace and span IDs.
