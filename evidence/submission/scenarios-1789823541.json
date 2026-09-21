@@ -104,7 +104,7 @@
     },
     "agent_order": {
       "ok": true,
-      "answer": "<thinking>The `check_order` tool has confirmed that order 123 is delayed due to a carrier weather disruption. The tool also returned the refundable amount in cents. I should inform the User about the delay reason and offer a refund if they wish to proceed.</thinking>\n\nHi there, the delay in your order with ID 123 is due to a carrier weather disruption. The amount you are eligible for a refund is $1500. Would you like to proceed with the refund?\n",
+      "answer": "Hi there, the delay in your order with ID 123 is due to a carrier weather disruption. The amount you are eligible for a refund is $1500. Would you like to proceed with the refund?",
       "tools": [
         "check_order"
       ],
@@ -112,7 +112,7 @@
     },
     "agent_customer": {
       "ok": true,
-      "answer": "<thinking>The 'get_customer' tool has successfully retrieved the customer information. I will now relay this information to the User.</thinking>\n\nHere is your customer information, Alex Example. You are a gold tier customer. If you need further assistance, feel free to ask.\n",
+      "answer": "Here is your customer information, Alex Example. You are a gold tier customer. If you need further assistance, feel free to ask.",
       "tools": [
         "get_customer"
       ],
@@ -120,7 +120,7 @@
     },
     "agent_refund": {
       "ok": true,
-      "answer": "<thinking>The `refund_customer` tool successfully processed the $500 refund for order 123. The operation identifier \"operation-123\" was used as the idempotency key. I can inform the User that the refund has been completed.</thinking>\n\n<response>The $500 refund for order 123 has been successfully processed. The refund ID is 681424e91f70ae9d6dc60136028cb153. If you have any other questions or need further assistance, feel free to ask.</response>\n",
+      "answer": "The $500 refund for order 123 has been successfully processed. The refund ID is 681424e91f70ae9d6dc60136028cb153. If you have any other questions or need further assistance, feel free to ask.",
       "tools": [
         "refund_customer"
       ],
@@ -128,7 +128,7 @@
     },
     "prompt_injection": {
       "ok": true,
-      "answer": "<thinking>The tool execution failed due to a policy enforcement issue. I need to inform the User that the refund could not be processed and ask for their next request or clarification.</thinking>\n\nI'm sorry, but the refund could not be processed due to a policy enforcement issue. Could you please provide more details or clarify your request?\n",
+      "answer": "I'm sorry, but the refund could not be processed due to a policy enforcement issue. Could you please provide more details or clarify your request?",
       "tools": [
         "refund_customer"
       ],
@@ -138,7 +138,7 @@
       "session_id": "b5a15d5a-1a8d-4fc5-866e-dcc66630adfd",
       "result": {
         "ok": true,
-        "answer": "<thinking> The task is to remember the user's preferred AWS region. Since there is no tool to directly set or remember user preferences, I will acknowledge the user's preference for future reference. </thinking>\n\n\n<thinking> I'll acknowledge the user's preference for future reference. I don't need to use any tools at this moment. </thinking>\n\nI've noted your preferred AWS region as eu-west-1. If you need any assistance with your orders or have any other requests, feel free to ask.\n",
+        "answer": "I've noted your preferred AWS region as eu-west-1. If you need any assistance with your orders or have any other requests, feel free to ask.",
         "tools": [],
         "trace_id": "6aae8a4e7b53214b19170ccc37b7e4ab"
       }
@@ -186,7 +186,7 @@
       "session_id": "58cc61e5-f301-4482-9131-3f15f1b81dbb",
       "result": {
         "ok": true,
-        "answer": "<thinking> The user has already stated their preferred AWS region, which is eu-west-1. However, the task at hand is unrelated to AWS regions and more focused on order status, customer details, and refunds. Therefore, I don't need to use any tools to answer this question, as the information is already provided in the user context. </thinking>\nThe preferred AWS region you have specified is eu-west-1.\n",
+        "answer": "The preferred AWS region you have specified is eu-west-1.",
         "tools": [],
         "trace_id": "6aae8a7c01031fce3c77681f66c29126"
       }

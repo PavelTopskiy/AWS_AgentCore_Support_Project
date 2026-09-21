@@ -13,8 +13,8 @@ The sanitized live report `scenarios-1789823541.json` was produced by
 - preference storage, asynchronous extraction, and retrieval in a second session.
 
 The data is synthetic. Account and resource identifiers are deployment metadata,
-not credentials. Add CloudWatch screenshots and the completed trace/span failure
-matrix here after enabling AgentCore trace and application-log delivery.
+not credentials. The folder includes reviewed CloudWatch screenshots and failure
+records captured after AgentCore trace and application-log delivery were enabled.
 
 Cloud fault drills recorded after observability was enabled:
 

@@ -6,7 +6,10 @@
 
 Also passed: Ruff lint/format, CloudFormation schema validation for both templates, runtime module import, and deployment shell syntax.
 
-**Environment: local injected failures, not AWS.** These are actual generated OTel IDs. AWS deployment, Docker image build, Cedar service evaluation and live cross-session memory remain unverified.
+**Environment for the table below: deterministic local failure injection.** These
+are genuine generated OTel trace/span IDs, but they are not AWS executions. The
+separate [`submission/`](submission/) folder contains the reviewed live AgentCore,
+Cedar, Memory, and AWS failure-drill evidence.
 
 | Scenario | Trace ID | Relevant span ID | Span |
 |---|---|---|---|
@@ -17,4 +20,4 @@ Also passed: Ruff lint/format, CloudFormation schema validation for both templat
 | llm_loop | `b09751d5203a02c4b183a04e5625fe1f` | `d1234a4daccedfe2` | `execute_event_loop_cycle` |
 
 Root causes and all parent/child spans: [local-traces.json](local-traces.json).
-Test cases: [JUnit XML](junit.xml). Cloud evidence checklist: [EVIDENCE.md](../docs/EVIDENCE.md).
+Test cases: [JUnit XML](junit.xml). Reviewed AWS evidence: [submission/](submission/).

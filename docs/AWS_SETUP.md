@@ -124,15 +124,10 @@ account/region**, or change those names in the generator for another environment
 Use a short stack name such as `support-agent` so the generated Gateway name fits
 its length limit.
 
-If deployment fails, inspect **CloudFormation → stack → Events**. Fix the reported
-permission, model, quota or resource error before retrying. Never disable policy
-enforcement to work around a deployment failure. If the stack rolls back to
-`ROLLBACK_COMPLETE`, remove the failed stack after reviewing its retained resources
-before a fresh deployment.
-
-For a stack in `ROLLBACK_COMPLETE` or `ROLLBACK_FAILED`, remove the failed stack
-record and wait for deletion before rerunning. A `ROLLBACK_FAILED` caused by
-AgentCore Memory still being created can be retried once Memory reaches `ACTIVE`:
+If deployment fails, inspect **CloudFormation → stack → Events** and correct the
+reported permission, model, quota, or resource error. Never disable policy
+enforcement to bypass a failure. Review retained resources before deleting a failed
+stack; once any transitional AgentCore resources have stabilized, cleanup is:
 
 ```bash
 aws cloudformation delete-stack --stack-name support-agent
@@ -140,11 +135,9 @@ aws cloudformation wait stack-delete-complete --stack-name support-agent
 bash scripts/deploy.sh
 ```
 
-The table uses `DeletionPolicy: Retain`, so a failed create can leave an orphaned,
-empty synthetic table. Review it in DynamoDB before deleting it. For the first
-failed deployment on 2026-09-19, CloudFormation reported the generated table name
-`support-agent-Table-1U9ZUJDHXZVN2`. Delete it only after confirming it contains no
-required records; deleting a DynamoDB table is irreversible.
+The table uses `DeletionPolicy: Retain`, so a failed create can leave an orphaned
+synthetic table. Review its contents before deleting it; deleting a DynamoDB table
+is irreversible.
 
 ## 4. Capture outputs and seed synthetic data
 
@@ -236,7 +229,7 @@ uv run python -m scripts.gateway_call --url "$GATEWAY_URL" --tool refund_custome
 
 Expected: Gateway policy denial, no business Lambda call for that request, no
 refund ledger entry. Capture the actual policy decision and trace in CloudWatch.
-Follow [EVIDENCE.md](EVIDENCE.md) for fault drills and submission artifacts.
+See the [evidence index](../evidence/README.md) for live results and fault-drill artifacts.
 
 ## 8. Cleanup
 
@@ -260,5 +253,5 @@ Transaction Search or remove account-wide policies used by other applications.
 - [Observability setup and service log destinations](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/observability-configure.html)
 - [Runtime permissions](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-permissions.html)
 
-Checked during implementation on 2026-09-18. CloudFormation linting checks schemas;
-only a successful deployment and live tests establish account-specific readiness.
+CloudFormation linting checks schemas; only a successful deployment and live tests
+establish account-specific readiness.
