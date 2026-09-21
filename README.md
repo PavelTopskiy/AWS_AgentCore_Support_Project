@@ -20,7 +20,6 @@ need to be captured for the submission.
 2. Run the [scenario and submission checklist](docs/EVIDENCE.md).
 3. Use the [observability runbook](docs/OBSERVABILITY.md) for failures.
 4. Review [architecture](docs/ARCHITECTURE.md) and [security boundaries](docs/SECURITY.md).
-5. Follow the [mentor demo script](docs/MENTOR_DEMO.md) for the final walkthrough.
 
 ```bash
 uv sync --frozen --extra dev
